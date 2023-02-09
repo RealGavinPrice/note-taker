@@ -1,6 +1,7 @@
 const fs = require('fs');
 const util = require('util');
 
+
 // Promise version of fs.readFile
 const readFromFile = util.promisify(fs.readFile);
 /**
@@ -25,12 +26,21 @@ const readAndAppend = (content, file) => {
       console.error(err);
     } else {
       const parsedData = JSON.parse(data);
-      parsedData.push(content);
-      writeToFile(file, parsedData);
+      console.log("Logging content that gets to fsUtils")
+      console.log(content);
+      console.log("And then the parsed data.push... :: ")
+      // parsedData.push(content);
+      fs.appendFile(file, `${content}`, (err) => {
+        if (err) throw err;
+        console.log('The "data to append" was appended to file!');
+      });
     }
   });
 };
 
 
 
-module.exports = { readFromFile, writeToFile, readAndAppend };
+module.exports = { readFromFile, 
+  writeToFile, 
+  readAndAppend, 
+};

@@ -1,11 +1,14 @@
 const router = require('express').Router();
 const { readFromFile, writeToFile, readAndAppend } = require('../../helpers/fsUtils');
-const { updateDatabase, createNewNote } = require('../../helpers/notes');
+// const { updateDatabase, createNewNote } = require('../../helpers/notes');
 const fs = require('fs');
 // const express = require('express');
 const { json } = require('express');
 const { v4: uuidv4 } = require('uuid');
-const database = require("../../db/db.json");
+const database  = require("../../db/db.json");
+const { error } = require('console');
+// const { database } = require("../../public/db/db.json");
+
 
 
 
@@ -28,19 +31,21 @@ router.post ('/notes', (req,res) => {
     console.log(`${req.method} request has been received for a new note`);
     req.body.id = uuidv4();
     console.log (req.body);
-    const newNote = readAndAppend(req.body, "../../db/db.json");
+    let content = req.body;
+    const newNote = readAndAppend(content, "/Users/emily/bootcamp/11-Express/02-Challenge/db/db.json");
     res.json(newNote);
-//     const { title, text, id } = req.body;
+//     let { title, text, id } = req.body;
 //     if (title & text & id) {
 //         const newNote = {
 //             text,
 //             title,
 //             id : { v4: uuidv4 } 
 //         };
+//         console.log(req.body);
 //     readAndAppend(newNote, "../../db/db.json");
 //     res.json(`Note added successfully 🧩 `);
 //   } else {
-//     res.error("Error with adding note 🎹");
+//     res.json("Error with adding note 🎹");
 //   }
 });
 
