@@ -29,7 +29,7 @@ const readAndAppend = (content, file) => {
       console.log("Logging content that gets to fsUtils")
       console.log(content);
       console.log("And then the parsed data.push... :: ")
-      // parsedData.push(content);
+      parsedData.push(content);
       fs.appendFile(file, `${content}`, (err) => {
         if (err) throw err;
         console.log('The "data to append" was appended to file!');

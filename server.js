@@ -6,8 +6,7 @@ const api = require('./routes/api/index');
 const html = require('./routes/html/index');
 
 
-// Import custom middleware, "cLog"
-app.use(clog);
+
 
 app.use(express.static('public'));
 
@@ -15,12 +14,18 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
 
-
+// Import custom middleware, "cLog"
+app.use(clog);
 
 
 
 app.use('/api', api);
 app.use('/', html);
+
+// Import custom middleware, "cLog"
+app.use(clog);
+
+
 
 
 app.listen(PORT, () => {
